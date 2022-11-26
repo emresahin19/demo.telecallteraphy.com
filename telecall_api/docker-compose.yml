@@ -1,0 +1,53 @@
+version: '3'
+
+services:
+  webdb:
+    image: mariadb:10.4
+    #command: >
+    #  sh -c "/usr/sbin/mariadbd --user=root && echo 'Starting mysql...'"
+    command: [--innodb-log-file-size=16M,--max-allowed-packet=1G]
+    environment:
+      - MYSQL_ROOT_PASSWORD=supersecretpassword
+      - MYSQL_DATABASE=telecall
+      - MYSQL_USER=root
+    volumes:
+      - ./data/:/var/lib/mysql/
+    ports:
+      - "3306:3306"
+    networks:
+      - webapp-network
+
+  webapp:
+    build:
+      context: .
+    #command: >
+    #  sh -c "composer update"
+    ports:
+      - '8000:8000'
+    environment:
+      - VIRTUAL_HOST=localhost
+    depends_on:
+      - webdb
+    volumes:
+      - '.:/var/www/html'
+    networks:
+      - webapp-network
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: dev_pma
+    environment:
+      PMA_HOST: webdb
+      PMA_PORT: 3306
+      PMA_ARBITRARY: 1
+    depends_on:
+      - webdb
+    restart: always
+    ports:
+      - 8183:80
+    networks:
+      - webapp-network
+      
+networks:
+  webapp-network:
+    driver: bridge

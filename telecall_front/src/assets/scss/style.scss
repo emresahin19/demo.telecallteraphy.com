@@ -1,0 +1,181 @@
+
+@import '_themes-vars.module.scss';
+@import '~video-react/styles/scss/video-react';
+@import '@draft-js-plugins/linkify/lib/plugin.css';
+
+
+.avatar-input {
+    height: 125px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    position: relative;
+    margin-top: -8px;
+    border-radius: 16px;
+    overflow: hidden;
+}
+.avatar-input input {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    opacity: 0;
+    z-index: 99;
+    inset: 0;
+    cursor: pointer;
+}
+.avatar-input img {
+    width: auto;
+    height: 100%;
+    position: relative;
+}
+.link-a {
+    color: $secondaryMain;
+    text-decoration: none !important;
+    transition: .1s linear all;
+}
+.link-a.black {
+    color: #000;
+    text-decoration: none !important;
+    transition: .1s linear all;
+}
+.link-a:hover {
+    color: $secondary800;
+}
+.link-a:active {
+    color: $secondary200;
+}
+.opened-info {
+    background: $secondaryLight;
+}
+
+@for $i from 1 through 100 {
+    .mw-#{$i} {
+      width: $i*1%;
+    }
+}
+.info-table .MuiTableCell-body {
+    vertical-align: top;
+}
+.info-table .MuiTableCell-body:nth-child(1) {
+    padding-top: 32px !important;
+}
+
+.video-react .video-react-control, .video-react .video-react-big-play-button {
+    inset: 0 !important;
+    margin: auto;
+}
+#mui-rte-root {
+    height: calc(100% - 26px);
+}
+#mui-rte-container {
+    height: 100%;
+    padding: 8px;
+}
+#mui-rte-editor-container {
+    background: #fff;
+}
+.icon-button {
+    margin: 0 4px;
+}
+.camera-view {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 16px;
+    max-height: 360px;
+}
+.chat-area {
+    // height: calc(100% - 70px);
+    display: block;
+    display: block;
+    height: 306px;
+}
+.chat-area ul {
+    height: 100%;
+    width: 100%;
+    padding-left: 0;
+    list-style: none;
+    background: #ede7f6;
+    padding: 16px;
+    margin: 0;
+    border-radius: 8px;
+    overflow-y: scroll;
+    transition: .2s ease-in all;
+    scroll-behavior: smooth;
+}
+.message-send-area {
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.message-send-area button {
+    width: 110px;
+}
+.message-send-area .MuiFormControl-root  {
+    width: calc(100% - 110px);
+}
+.message-ballon {
+    width: fit-content;
+    padding: 6px;
+    border-radius: 4px;
+    max-width: 50%;
+    margin: 4px;
+    position: relative;
+    z-index: 9;
+    border: 1px solid;
+    word-break: break-word;
+    box-shadow: rgb(50 50 93 / 25%) 0px 6px 12px -2px, rgb(0 0 0 / 30%) 0px 3px 7px -3px;
+    animation: .2s baloon;
+    transition: .2s ease-in all;
+}
+.receive-message-side {
+    background: $darkPrimaryLight;    
+    border-color: $darkPrimary200 !important;
+}
+.send-message-side {
+    margin-left: auto !important;
+    background: $successLight;    
+    border-color: $success200 !important;
+}
+.send-message-side::before {
+    content: "";
+    position: absolute;
+    width: 10px;
+    height: 7px;
+    background: inherit;
+    right: -5px;
+    bottom: 2px;
+    transform: rotate(-17deg) skew(50deg);
+    z-index: -1;
+    border: 1px solid;
+    border-color: transparent $success200 $success200  transparent;
+}
+.receive-message-side::before {
+    content: "";
+    position: absolute;
+    width: 10px;
+    height: 7px;
+    background: inherit;
+    left: -5px;
+    bottom: 2px;
+    transform: rotate(-17deg) skew(50deg);
+    z-index: -1;
+    border: 1px solid;
+    border-color: $darkPrimary200 transparent transparent $darkPrimary200;
+}
+::-webkit-scrollbar {
+    width: 6px;
+    background: $secondary200;
+}
+::-webkit-scrollbar-thumb {
+    background: $secondaryDark;
+}
+@keyframes baloon {
+    from {
+        transform: scale(0);
+    }
+    to {
+        transform: scale(1);
+    }
+}
